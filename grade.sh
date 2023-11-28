@@ -25,12 +25,20 @@ fi
 cp student-submission/ListExamples.java grading-area/ListExamples.java
 #cp `find student-submission -name ListExamples.java` grading-area/ListExamples.java
 cp TestListExamples.java grading-area/TestListExamples.java
-cp -r lib grading-area
+
+cp -R lib grading-area
 
 cd grading-area
 #pwd
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" *.java
-java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > results.txt
+#echo "Before Javac"
+#ls
+javac -cp $CPATH *.java
+
+#echo "after Javac"
+
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > results.txt
+
+#echo "after Java"
 
 if [[ `grep "Tests run:" results.txt` ]]
 then
